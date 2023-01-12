@@ -1,22 +1,57 @@
-# Telegram Bot in Docker
+# Telegram-бот в Docker [RUS]  [ENG ->]
+
+Этот репозиторий является руководством по созданию Telegram-бота с использованием Docker.
+
+## Первый шаг. Установите Docker Engine и Docker-Compose
+
+(Docker Engine)[https://docs.docker.com/engine/install/ubuntu /]
+
+(Docker-Compose)[https://docs.docker.com/compose/install/linux /]
+
+## Второй шаг. Создайте бота с помощью @BotFather в Telegram
+
+Используйте Telegram [Часто задаваемые вопросы](https://core.telegram.org/bots/faq#how-do-i-create-a-bot ) для бота.
+
+## Третий шаг. Создайте образ для Docker
+
+В переменных окружения вам нужно поместить токен API бота, а также адрес прокси-сервера и пароль для входа в него.
+
+`TELEGRAM_API_TOKEN` — токен API бота.
+
+`TELEGRAM_ACCESS_ID` — идентификатор учетной записи Telegram, с которой будут приниматься сообщения (сообщения от других учетных записей игнорируются).
+
+Использование с Docker показано ниже. Предварительно заполните переменные ENV, указанные выше, в __Dockerfile__. База данных SQLite будет находиться в папке проекта 'db/finance.db'.
+
+Откройте каталог с файлами из этого репозитория.
+
+Создание образа и контейнера. Запуск контейнера в автономном режиме.
+
+    docker-compose up -build -d
+
+Остановка контейнера:
+
+    docker-compose stop
+
+Запуск контейнера:
+
+    docker-compose up -d
+
+-----------------------------------------------------------------
+
+# Telegram Bot in Docker [ENG]
 This repository is tutorial to creating Telegram Bot with using Docker.
 
-## First Step. Create Docker Repository
-
-Create Repository in Docker Hub.
-In next time you can clone this repository.
-
-## Second Step. Install Docker Engine and Docker-Compose
+## First Step. Install Docker Engine and Docker-Compose
 
 (Docker Engine)[https://docs.docker.com/engine/install/ubuntu/]
 
 (Docker-Compose)[https://docs.docker.com/compose/install/linux/]
 
-## Third Step. Create Bot with help @BotFather in Telegram
+## Second Step. Create Bot with help @BotFather in Telegram
 
 Use Telegram [FAQ](https://core.telegram.org/bots/faq#how-do-i-create-a-bot) for Bot.
 
-## Fourth Step. Build image for Docker
+## Third Step. Build image for Docker
 
 In the environment variables, you need to put the bot's API token, as well as the proxy address and login password to it.
 
