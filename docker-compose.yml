@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  python:
+    build:
+      ./python
+    volumes:
+      - ./src/app:/usr/src/app
+      - ./src/app/db:/home/db
