@@ -2,11 +2,13 @@
 
 Этот репозиторий является руководством по созданию Telegram-бота с использованием Docker.
 
+Вдохновлялся кодом из [этого](https://github.com/alexey-goloburdin/telegram-finance-bot) (https://github.com/alexey-goloburdin/telegram-finance-bot) репозитория.
+
 ## Первый шаг. Установите Docker Engine и Docker-Compose
 
-(Docker Engine)[https://docs.docker.com/engine/install/ubuntu /]
+[Docker Engine](https://docs.docker.com/engine/install/ubuntu/)
 
-(Docker-Compose)[https://docs.docker.com/compose/install/linux /]
+[Docker-Compose](https://docs.docker.com/compose/install/linux/)
 
 ## Второй шаг. Создайте бота с помощью @BotFather в Telegram
 
@@ -39,13 +41,16 @@
 -----------------------------------------------------------------
 
 # Telegram Bot in Docker [ENG]
+
 This repository is tutorial to creating Telegram Bot with using Docker.
+
+Inspired by code from [this](https://github.com/alexey-goloburdin/telegram-finance-bot) (https://github.com/alexey-goloburdin/telegram-finance-bot) repository.
 
 ## First Step. Install Docker Engine and Docker-Compose
 
-(Docker Engine)[https://docs.docker.com/engine/install/ubuntu/]
+[Docker Engine](https://docs.docker.com/engine/install/ubuntu/)
 
-(Docker-Compose)[https://docs.docker.com/compose/install/linux/]
+[Docker-Compose](https://docs.docker.com/compose/install/linux/)
 
 ## Second Step. Create Bot with help @BotFather in Telegram
 
