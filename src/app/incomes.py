@@ -76,7 +76,7 @@ def get_month_income_statistics() -> str:
     if not result[0]:
         return "В этом месяце ещё нет доходов"
     month_incomes = result[0]
-    return (f"Расходы в текущем месяце:\n"
+    return (f"Доходы в текущем месяце:\n"
             f"{month_incomes} руб. из {_get_budget_limit()} руб.\n\n"
             f"За сегодня: /today_incomes")
 

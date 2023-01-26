@@ -33,25 +33,25 @@ def main_keyboard():
 
 def incomes_keyboard():
     inline_keyboard = InlineKeyboardMarkup(row_width=3).add(
-        InlineKeyboardButton("Добавить", callback_data="/add_income"),
-        InlineKeyboardButton("Удалить", callback_data="/del_income"),
+        #InlineKeyboardButton("Добавить", callback_data="/add_income"),
+        #InlineKeyboardButton("Удалить", callback_data="/del_income"),
         InlineKeyboardButton("Последние", callback_data="/list_incomes"),
-        InlineKeyboardButton("Сегодня", callback_data="/today_incomes"),
-        InlineKeyboardButton("Месяц", callback_data="/month_incomes"),
-        InlineKeyboardButton("Все", callback_data="/all_incomes"),
-        InlineKeyboardButton("Назад в меню", callback_data="/main_keyboard")
+        #InlineKeyboardButton("Сегодня", callback_data="/today_incomes"),
+        #InlineKeyboardButton("Месяц", callback_data="/month_incomes"),
+        #InlineKeyboardButton("Все", callback_data="/all_incomes"),
+        InlineKeyboardButton("Назад в меню", callback_data="/main_menu")
     )
     return inline_keyboard
 
 
 def expenses_keyboard():
     inline_keyboard = InlineKeyboardMarkup(row_width=3).add(
-        InlineKeyboardButton("Добавить", callback_data="/add_expense"),
-        InlineKeyboardButton("Удалить", callback_data="/del_expense"),
+        #InlineKeyboardButton("Добавить", callback_data="/add_expense"),
+        #InlineKeyboardButton("Удалить", callback_data="/del_expense"),
         InlineKeyboardButton("Последние", callback_data="/list_expenses"),
         InlineKeyboardButton("Сегодня", callback_data="/today_expenses"),
         InlineKeyboardButton("Месяц", callback_data="/month_expenses"),
         InlineKeyboardButton("Все", callback_data="/all_expenses"),
-        InlineKeyboardButton("Назад в меню", callback_data="/main_keyboard")
+        InlineKeyboardButton("Назад в меню", callback_data="/main_menu")
     )
     return inline_keyboard
