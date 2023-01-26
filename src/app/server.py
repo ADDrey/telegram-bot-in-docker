@@ -29,8 +29,8 @@ Bot Menu:
 help - Справка по боту
 sub_categories - Список категорий
 list_expenses - Последние изменения
-today_expenses - Траты за сегодня
-month_expenses - Траты за месяц
+today_expenses - Расходы за сегодня
+month_expenses - Расходы за месяц
 list_incomes - Последние доходы
 today_incomes - Доходы за сегодня
 month_incomes - Доходы за месяц
@@ -51,7 +51,7 @@ async def send_welcome(message: types.Message):
 
 
 @dp.message_handler(commands=['меню'])
-@dp.message_handler(lambda message: message.text.startswith('меню'))
+@dp.message_handler(lambda message: message.text.startswith('Меню'))
 async def first_menu(message: types.Message):
     """Выводит главное меню бота"""
     await message.answer("Выберете пункт меню", reply_markup=keyboards.select_keyboard("/main_menu"))
@@ -93,7 +93,7 @@ async def q_list_expense(call: types.CallbackQuery):
         f"{expense.amount} руб. - {expense.sub_category_name} — нажми "
         f"/del_expense{expense.id} для удаления"
         for expense in last_expenses]
-    answer_message = "Последние сохранённые траты:\n\n* " + "\n\n* " \
+    answer_message = "Последние сохранённые расходы:\n\n* " + "\n\n* " \
         .join(last_expenses_rows)
     await call.message.answer(answer_message)
 
@@ -109,7 +109,7 @@ async def del_expense(message: types.Message):
 
 @dp.message_handler(lambda message: message.text.startswith('/del_income'))
 async def del_income(message: types.Message):
-    """Удаляет одну запись о расходе по её идентификатору"""
+    """Удаляет одну запись о доходе по её идентификатору"""
     row_id = int(message.text[11:])
     incomes.delete_income(row_id)
     answer_message = "Удалил запись о доходе"
@@ -118,37 +118,37 @@ async def del_income(message: types.Message):
 
 @dp.message_handler(commands=['sub_categories'])
 async def sub_categories_list(message: types.Message):
-    """Отправляет список категорий расходов"""
+    """Отправляет список категорий операций с финансами"""
     sub_categories = SubCategories().get_all_sub_categories()
-    answer_message = "Категории трат:\n\n* " + \
+    answer_message = "Категории операций:\n\n* " + \
                      ("\n* ".join([c.name + ' (' + ", ".join(c.aliases) + ')' for c in sub_categories]))
     await message.answer(answer_message)
 
 
 @dp.message_handler(commands=['today_expenses'])
 async def today_statistics(message: types.Message):
-    """Отправляет сегодняшнюю статистику трат"""
+    """Отправляет сегодняшнюю статистику расходов"""
     answer_message = expenses.get_today_expense_statistics()
     await message.answer(answer_message)
 
 
 @dp.message_handler(commands=['month_expenses'])
 async def month_statistics(message: types.Message):
-    """Отправляет статистику трат текущего месяца"""
+    """Отправляет статистику расходов текущего месяца"""
     answer_message = expenses.get_month_expense_statistics()
     await message.answer(answer_message)
 
 
 @dp.message_handler(commands=['today_incomes'])
 async def today_statistics(message: types.Message):
-    """Отправляет сегодняшнюю статистику трат"""
+    """Отправляет сегодняшнюю статистику доходов"""
     answer_message = incomes.get_today_income_statistics()
     await message.answer(answer_message)
 
 
 @dp.message_handler(commands=['month_incomes'])
 async def month_statistics(message: types.Message):
-    """Отправляет статистику трат текущего месяца"""
+    """Отправляет статистику доходов текущего месяца"""
     answer_message = incomes.get_month_income_statistics()
     await message.answer(answer_message)
 
@@ -165,7 +165,7 @@ async def list_expenses(message: types.Message):
         f"{expense.amount} руб. на {expense.sub_category_name} — нажми "
         f"/del_expense{expense.id} для удаления"
         for expense in last_expenses]
-    answer_message = "Последние сохранённые траты:\n\n* " + "\n\n* " \
+    answer_message = "Последние сохранённые расходы:\n\n* " + "\n\n* " \
         .join(last_expenses_rows)
     await message.answer(answer_message)
 
@@ -192,7 +192,7 @@ async def get_text_messages(message: types.Message):
     """Обрабатывает текстовые обращения пользователя в главном меню"""
     if 'привет' in message.text.lower():
         await message.answer('Привет!')
-    elif 'доход' in message.text.lower():
+    elif 'д' in message.text.lower() or 'доход' in message.text.lower() or '+' in message.text.lower():
         """Добавляет новый доход"""
         try:
             income = incomes.add_income(message.text)
@@ -203,7 +203,7 @@ async def get_text_messages(message: types.Message):
             f"Добавлены доходы {income.amount} руб. источник - {income.sub_category_name}.\n\n"
             f"{incomes.get_today_income_statistics()}")
         await message.answer(answer_message)
-    elif 'расход' in message.text.lower():
+    elif 'р' in message.text.lower() or 'расход' in message.text.lower() or '-' in message.text.lower():
         """Добавляет новый расход"""
         try:
             expense = expenses.add_expense(message.text)
@@ -211,7 +211,7 @@ async def get_text_messages(message: types.Message):
             await message.answer(str(e))
             return
         answer_message = (
-            f"Добавлены траты {expense.amount} руб на {expense.sub_category_name}.\n\n"
+            f"Добавлены расходы {expense.amount} руб на {expense.sub_category_name}.\n\n"
             f"{expenses.get_today_expense_statistics()}")
         await message.answer(answer_message)
     else:
