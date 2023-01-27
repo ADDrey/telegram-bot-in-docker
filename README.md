@@ -40,7 +40,7 @@
     
 Запуск контейнера:
 
-    docker run -d --restart unless-stopped [image_name]
+    docker run -d /[local_project_path]/db:/home/db --restart unless-stopped [image_name]
 
 Остановка контейнера:
 
