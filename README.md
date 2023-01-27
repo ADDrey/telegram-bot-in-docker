@@ -34,17 +34,22 @@
     # -t - настройка имени для образа в самом Docker вписываем вместо [image_name].
     # [PATH_to_Dockerfile] - путь до файла с инструкциями Dockerfile.
 
-Создание контейнера.
-    
-    docker create [image_name] 
-    
-Запуск контейнера:
+Создание и Запуск контейнера:
 
-    docker run -d /[local_project_path]/db:/home/db --restart unless-stopped [image_name]
+    docker run -d --name tgbot -v ./db:/home/db --restart unless-stopped [image_name]
+    
+Создание БД в контейнере:
+
+    docker exec -ti tgbot bash
+    sqlite3 /home/db/finance.db
+    CTRL+C
+    CTRL+C
+    CTRL+C
+    exit
 
 Остановка контейнера:
 
-    docker stop [container_id]
+    docker stop tgbot
 
 -----------------------------------------------------------------
 
@@ -84,13 +89,18 @@ Image Creation:
     # -t - configure the name for the image in the docker, enter instead of [image_name].
     # [PATH_to_Dockerfile] is the path to the Dockerfile.
 
-Container Creation.
-    
-    docker create [image_name] 
-    
-Start the container:
+Build and Start the container:
 
-    docker run -d -restart unless-stopped [image_name]
+    docker run -d --name tgbot -v ./db:/home/db --restart unless-stopped [image_name]
+    
+Create DB in the container:
+
+    docker exec -ti tgbot bash
+    sqlite3 /home/db/finance.db
+    CTRL+C
+    CTRL+C
+    CTRL+C
+    exit
 
 Container stop:
 
