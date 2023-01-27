@@ -135,4 +135,4 @@ def _get_budget_limit() -> int:
     
     # TODO: Заменить передачу данных на словарь с лимитами
     db = DataBase()
-    return db.fetchall("budgets", ["month_limit"])[4]["month_limit"]
+    return db.fetchall("budgets", ["month_limit"])[5]["month_limit"]
