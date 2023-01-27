@@ -26,19 +26,19 @@ def main_keyboard():
     inline_keyboard = InlineKeyboardMarkup(row_width=3).add(
         InlineKeyboardButton("Доходы", callback_data="/incomes_menu"),
         InlineKeyboardButton("Расходы", callback_data="/expenses_menu"),
-        InlineKeyboardButton("Отчёты", callback_data="/reports_budget_home_menu")
+        #InlineKeyboardButton("Отчёты", callback_data="/reports_budget_home_menu") # in dev
     )
     return inline_keyboard
 
 
 def incomes_keyboard():
     inline_keyboard = InlineKeyboardMarkup(row_width=3).add(
-        #InlineKeyboardButton("Добавить", callback_data="/add_income"),
-        #InlineKeyboardButton("Удалить", callback_data="/del_income"),
+        #InlineKeyboardButton("Добавить", callback_data="/add_income"), # in dev
+        #InlineKeyboardButton("Удалить", callback_data="/del_income"), # in dev
         InlineKeyboardButton("Последние", callback_data="/list_incomes"),
-        #InlineKeyboardButton("Сегодня", callback_data="/today_incomes"),
-        #InlineKeyboardButton("Месяц", callback_data="/month_incomes"),
-        #InlineKeyboardButton("Все", callback_data="/all_incomes"),
+        #InlineKeyboardButton("Сегодня", callback_data="/today_incomes"), # in dev
+        #InlineKeyboardButton("Месяц", callback_data="/month_incomes"), # in dev
+        #InlineKeyboardButton("Все", callback_data="/all_incomes"), # in dev
         InlineKeyboardButton("Назад в меню", callback_data="/main_menu")
     )
     return inline_keyboard
@@ -46,12 +46,12 @@ def incomes_keyboard():
 
 def expenses_keyboard():
     inline_keyboard = InlineKeyboardMarkup(row_width=3).add(
-        #InlineKeyboardButton("Добавить", callback_data="/add_expense"),
-        #InlineKeyboardButton("Удалить", callback_data="/del_expense"),
+        #InlineKeyboardButton("Добавить", callback_data="/add_expense"), # in dev
+        #InlineKeyboardButton("Удалить", callback_data="/del_expense"), # in dev
         InlineKeyboardButton("Последние", callback_data="/list_expenses"),
-        InlineKeyboardButton("Сегодня", callback_data="/today_expenses"),
-        InlineKeyboardButton("Месяц", callback_data="/month_expenses"),
-        InlineKeyboardButton("Все", callback_data="/all_expenses"),
+        #InlineKeyboardButton("Сегодня", callback_data="/today_expenses"), # in dev
+        #InlineKeyboardButton("Месяц", callback_data="/month_expenses"), # in dev
+        #InlineKeyboardButton("Все", callback_data="/all_expenses"), # in dev
         InlineKeyboardButton("Назад в меню", callback_data="/main_menu")
     )
     return inline_keyboard
