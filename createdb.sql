@@ -37,10 +37,10 @@ values
 insert into categories(codename, name)
 values
     ("base_expense", "расход на базовые потребности"),
-    ("other_expense", "другие расходы"),
     ("flat_expense", "расход на квартиру"),
     ("debt_expense", "расход на долг"),
     ("car_expense", "расход на машину"),
+    ("other_expense", "другие расходы"),
     ("income", "доход");
 
 insert into sub_categories(codename, name, category, aliases)
