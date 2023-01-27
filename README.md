@@ -26,17 +26,25 @@
 
 Откройте каталог с файлами из этого репозитория.
 
-Создание образа и контейнера. Запуск контейнера в автономном режиме.
+Создание образа:
 
-    docker-compose up -build -d
+    docker build --force-rm --no-cache -t [image_name] [PATH_to_Dockerfile]
+    # --force-rm - удаление всех промежуточных образов после сборки своего образа.
+    # --no-cache - игнорирование кэша от редыдущих сборок, помогает при пересборке.
+    # -t - настройка имени для образа в самом Docker вписываем вместо [image_name].
+    # [PATH_to_Dockerfile] - путь до файла с инструкциями Dockerfile.
+
+Создание контейнера.
+    
+    docker create [image_name] 
+    
+Запуск контейнера:
+
+    docker run -d --restart unless-stopped [image_name]
 
 Остановка контейнера:
 
-    docker-compose stop
-
-Запуск контейнера:
-
-    docker-compose up -d
+    docker stop [container_id]
 
 -----------------------------------------------------------------
 
@@ -68,14 +76,22 @@ Usage with Docker is shown below. Pre-populate the ENV variables specified above
 
 Open directory with files from this repository.
 
-Create image and conteiner. Start conteiner in Detached mode.
+Image Creation:
 
-    docker-compose up --build -d
+    docker build --force-rm --no-cache -t [image_name] [PATH_to_Dockerfile]
+    # -force-rm - Removes all intermediate images after building your image.
+    # -no-cache - ignoring the cache from the redirecting builds, helps with re-collection.
+    # -t - configure the name for the image in the docker, enter instead of [image_name].
+    # [PATH_to_Dockerfile] is the path to the Dockerfile.
 
-Stoping conteiner:
+Container Creation.
+    
+    docker create [image_name] 
+    
+Start the container:
 
-    docker-compose stop
+    docker run -d -restart unless-stopped [image_name]
 
-Strating conteiner:
-  
-    docker-compose up -d
+Container stop:
+
+    docker stop [container_id]
