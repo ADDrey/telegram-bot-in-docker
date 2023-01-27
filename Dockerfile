@@ -11,6 +11,6 @@ COPY requirements.txt ./
 COPY createdb.sql ./
 COPY *.py ./
 RUN pip install --no-cache-dir -r requirements.txt
-RUN papt-get update && apt-get install sqlite3
+RUN apt-get update && apt-get install sqlite3
 
 ENTRYPOINT ["python", "server.py"]
