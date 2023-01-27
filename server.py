@@ -192,7 +192,7 @@ async def get_text_messages(message: types.Message):
     """Обрабатывает текстовые обращения пользователя в главном меню"""
     if 'привет' in message.text.lower():
         await message.answer('Привет!')
-    elif 'д' in message.text.lower() or 'доход' in message.text.lower() or '+' in message.text.lower():
+    elif message.text.startswith('Д') or message.text.startswith('д') or message.text.startswith('+') or 'доход' in message.text.lower():
         """Добавляет новый доход"""
         try:
             income = incomes.add_income(message.text)
@@ -203,7 +203,7 @@ async def get_text_messages(message: types.Message):
             f"Добавлены доходы {income.amount} руб. источник - {income.sub_category_name}.\n\n"
             f"{incomes.get_today_income_statistics()}")
         await message.answer(answer_message)
-    elif 'р' in message.text.lower() or 'расход' in message.text.lower() or '-' in message.text.lower():
+    elif message.text.startswith('Р') or message.text.startswith('р') or message.text.startswith('-') or 'расход' in message.text.lower():
         """Добавляет новый расход"""
         try:
             expense = expenses.add_expense(message.text)
@@ -215,7 +215,7 @@ async def get_text_messages(message: types.Message):
             f"{expenses.get_today_expense_statistics()}")
         await message.answer(answer_message)
     else:
-        await message.answer('Не понимаю, что это значит.\n Нажми /help для просмотра справки. ')
+        await message.answer('Не понимаю, что это значит.\nНажми /help для просмотра справки.')
 
 
 if __name__ == '__main__':
