@@ -96,7 +96,7 @@ def get_today_expense_statistics() -> str:
                    "and sub_category in (select codename "
                    "from sub_categories where category LIKE 'other_%') ")
     result = cursor.fetchone()
-    flat_today_expenses = result[0] if result[0] else 0
+    other_today_expenses = result[0] if result[0] else 0
 
     return (f"Расходы сегодня:\n"
             f"* всего — {all_today_expenses} руб.\n"
@@ -162,7 +162,7 @@ def get_month_expense_statistics() -> str:
                    "and sub_category in (select codename "
                    "from sub_categories where category LIKE 'other_%') ")
     result = cursor.fetchone()
-    flat_month_expenses = result[0] if result[0] else 0
+    other_month_expenses = result[0] if result[0] else 0
 
     return ("Расходы в текущем месяце:\n"
             f"* всего — {all_month_expenses} руб.\n"
