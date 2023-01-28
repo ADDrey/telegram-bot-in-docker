@@ -42,9 +42,9 @@
 
     docker exec -ti tgbot bash
     sqlite3 /home/db/finance.db
-    CTRL+C
-    CTRL+C
-    CTRL+C
+    sqlite> Database;
+    CTRL+C, CTRL+C, CTRL+C
+    ls ./db -a
     exit
 
 Остановка контейнера:
@@ -97,9 +97,9 @@ Create DB in the container:
 
     docker exec -ti tgbot bash
     sqlite3 /home/db/finance.db
-    CTRL+C
-    CTRL+C
-    CTRL+C
+    sqlite> Database;
+    CTRL+C, CTRL+C, CTRL+C
+    ls ./db -a
     exit
 
 Container stop:
