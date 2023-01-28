@@ -72,7 +72,7 @@ values
     ("education", "образование", "base_expense", "образование, учеба, повышение квалификации, обучение"),
     ("health", "здоровье", "base_expense", "здоровье, лечение, лекарство, стоматолог, терапевт"),
     ("cafe", "кафе", "base_expense", "ресторан, столовая, питание"),
-    ("sport", "спорт", "base_expense", "фитнес, тренажерка, тренажёрка, спортинвентарь");
+    ("sport", "спорт", "base_expense", "фитнес, тренажерка, тренажёрка");
 
 insert into sub_categories(codename, name, category, aliases)
 values
@@ -82,7 +82,7 @@ values
     ("subscriptions", "подписки", "other_expense", "подписка"),
     ("gift", "подарок", "other_expense", "подарок, подарки, презент кому"),
     ("household_goods", "хозтовары", "other_expense", "хозтовары, хозяйственные товары, хоз, уход, косметика"),
-    ("clothes", "одежда", "other_expense", "одежда, шмотки"),
+    ("clothes", "одежда", "other_expense", "одежда, шмотки, спортинвентарь"),
     ("technique", "техника", "other_expense", "электронника"),
     ("other_expenses", "прочие расходы", "other_expense", "прочие расходы, другие расходы");
 
