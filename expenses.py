@@ -90,12 +90,21 @@ def get_today_expense_statistics() -> str:
     result = cursor.fetchone()
     flat_today_expenses = result[0] if result[0] else 0
 
+    # Иные расходы за день
+    cursor.execute("select sum(amount) "
+                   "from transactions where date(created)=date('now', 'localtime') "
+                   "and sub_category in (select codename "
+                   "from sub_categories where category LIKE 'other_%') ")
+    result = cursor.fetchone()
+    flat_today_expenses = result[0] if result[0] else 0
+
     return (f"Расходы сегодня:\n"
             f"* всего — {all_today_expenses} руб.\n"
-            f"* базовые — {base_today_expenses} руб. из {_get_budgets_limit()} руб.\n"
-            f"* автомобильные — {car_today_expenses} руб. из {_get_budgets_limit()} руб.\n"
-            f"* долговые — {debts_today_expenses} руб. из {_get_budgets_limit()} руб.\n"
-            f"* квартирные — {flat_today_expenses} руб. из {_get_budgets_limit()} руб.\n\n"
+            f"* базовые — {base_today_expenses} руб.\n"
+            f"* автомобильные — {car_today_expenses} руб.\n"
+            f"* долговые — {debts_today_expenses} руб.\n"
+            f"* квартирные — {flat_today_expenses} руб.\n"
+            f"* иные — {other_today_expenses} руб.\n\n"
             f"За текущий месяц: /month_expenses")
 
 
@@ -147,13 +156,21 @@ def get_month_expense_statistics() -> str:
     result = cursor.fetchone()
     flat_month_expenses = result[0] if result[0] else 0
 
+    # Квартирные расходы за текущий месяц
+    cursor.execute("select sum(amount) "
+                   f"from transactions where date(created) >= '{first_day_of_month}' "
+                   "and sub_category in (select codename "
+                   "from sub_categories where category LIKE 'other_%') ")
+    result = cursor.fetchone()
+    flat_month_expenses = result[0] if result[0] else 0
+
     return ("Расходы в текущем месяце:\n"
             f"* всего — {all_month_expenses} руб.\n"
-            f"* базовые — {base_month_expenses} руб. из {_get_budgets_limit()} руб.\n"
-            f"* автомобильные — {car_month_expenses} руб. из {_get_budgets_limit()} руб.\n"
-            f"* долговые — {debts_month_expenses} руб. из {_get_budgets_limit()} руб.\n"
-            f"* квартирные — {flat_month_expenses} руб. из {_get_budgets_limit()} руб.\n"
-            f"{_get_budgets_limit()} руб.\\мес.\n\n"
+            f"* базовые — {base_month_expenses} руб. из {_get_budgets_limit('base')} руб.\n"
+            f"* автомобильные — {car_month_expenses} руб. из {_get_budgets_limit('car')} руб.\n"
+            f"* долговые — {debts_month_expenses} руб. из {_get_budgets_limit('debts')} руб.\n"
+            f"* квартирные — {flat_month_expenses} руб. из {_get_budgets_limit('flat')} руб.\n"
+            f"* иные — {other_month_expenses} руб. из {_get_budgets_limit('other')} руб.\n\n"
             "За сегодня: /today_expenses")
 
 
@@ -188,7 +205,7 @@ def _parse_message(raw_message: str) -> Message:
             or not regexp_result.group(1) or not regexp_result.group(2) or not regexp_result.group(3):
         raise exceptions.NotCorrectMessage(
             "Не могу понять сообщение. Напишите сообщение в формате:\n"
-            "расход 1500 метро")
+            "'расход 1500 метро' или 'Р 1500 метро''")
     amount = int(regexp_result.group(2).replace(" ", ""))
     sub_category_text = regexp_result.group(3).strip().lower()
     return Message(amount=amount, sub_category_text=sub_category_text)
@@ -208,10 +225,21 @@ def _get_now_datetime() -> datetime.datetime:
     return now
 
 
-def _get_budgets_limit() -> int:
+def _get_budgets_limit(expense_cat: str) -> int:
     """Возвращает месячный лимит трат для основных базовых трат."""
-
-    # TODO: Заменить передачу данных на словарь с лимитами
-    db = DataBase()
-    limit = db.fetchall("budgets", ["month_limit"])[0]["month_limit"]
+    if expense_cat == 'base':
+        db = DataBase()
+        limit = db.fetchall("budgets", ["month_limit"])[0]["month_limit"]
+    elif expense_cat == 'flat':
+        db = DataBase()
+        limit = db.fetchall("budgets", ["month_limit"])[1]["month_limit"]
+    elif expense_cat == 'flat':
+        db = DataBase()
+        limit = db.fetchall("budgets", ["month_limit"])[2]["month_limit"]
+    elif expense_cat == 'debts':
+        db = DataBase()
+        limit = db.fetchall("budgets", ["month_limit"])[3]["month_limit"]
+    elif expense_cat == 'other':
+        db = DataBase()
+        limit = db.fetchall("budgets", ["month_limit"])[4]["month_limit"]
     return limit
