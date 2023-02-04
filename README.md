@@ -36,7 +36,7 @@
 
 Создание и Запуск контейнера:
 
-    docker run -d --name tgbot -v ./db:/home/db --restart unless-stopped [image_name]
+    docker run -d --name tgbot -v /[full_path_to_db]/db:/home/db --restart unless-stopped [image_name]
     
 Создание БД в контейнере:
 
@@ -91,7 +91,7 @@ Image Creation:
 
 Build and Start the container:
 
-    docker run -d --name tgbot -v ./db:/home/db --restart unless-stopped [image_name]
+    docker run -d --name tgbot -v /[full_path_to_db]/db:/home/db --restart unless-stopped [image_name]
     
 Create DB in the container:
 
