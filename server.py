@@ -38,7 +38,7 @@ month_incomes - Доходы за месяц
 
 
 # Message Handlers
-@dp.message_handler(commands=['помощь', 'start', 'запуск'])
+@dp.message_handler(commands=['help', 'помощь', 'start', 'запуск'])
 @dp.message_handler(lambda message: message.text.startswith('помощь'))
 async def send_welcome(message: types.Message):
     """Отправляет приветственное сообщение и помощь по боту"""
