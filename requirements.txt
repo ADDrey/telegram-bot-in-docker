@@ -1,9 +1,9 @@
 aiogram==2.4
-aiohttp==3.6.2
+aiohttp==3.7.4
 async-timeout==3.0.1
 attrs==19.3.0
-Babel==2.7.0
-certifi==2019.11.28
+Babel==2.9.1
+certifi==2022.12.87
 chardet==3.0.4
 idna==2.8
 multidict==4.7.3
