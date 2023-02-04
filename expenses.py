@@ -233,10 +233,10 @@ def _get_budgets_limit(expense_cat: str) -> int:
     elif expense_cat == 'flat':
         db = DataBase()
         limit = db.fetchall("budgets", ["month_limit"])[1]["month_limit"]
-    elif expense_cat == 'flat':
+    elif expense_cat == 'debts':
         db = DataBase()
         limit = db.fetchall("budgets", ["month_limit"])[2]["month_limit"]
-    elif expense_cat == 'debts':
+    elif expense_cat == 'car':
         db = DataBase()
         limit = db.fetchall("budgets", ["month_limit"])[3]["month_limit"]
     elif expense_cat == 'other':
