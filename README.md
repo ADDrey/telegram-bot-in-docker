@@ -2,17 +2,15 @@
 
 Этот репозиторий является руководством по созданию Telegram-бота с использованием Docker.
 
-Вдохновлялся кодом из [этого](https://github.com/alexey-goloburdin/telegram-finance-bot) (https://github.com/alexey-goloburdin/telegram-finance-bot) репозитория.
+Вдохновлялся кодом из [этого](https://github.com/alexey-goloburdin/telegram-finance-bot) репозитория.
 
-## Первый шаг. Установите Docker Engine и Docker-Compose
+## Первый шаг. Установите Docker Engine
 
 [Docker Engine](https://docs.docker.com/engine/install/ubuntu/)
 
-[Docker-Compose](https://docs.docker.com/compose/install/linux/)
-
 ## Второй шаг. Создайте бота с помощью @BotFather в Telegram
 
-Используйте Telegram [Часто задаваемые вопросы](https://core.telegram.org/bots/faq#how-do-i-create-a-bot ) для бота.
+Используйте [Telegram Bots FAQ](https://core.telegram.org/bots/faq#how-do-i-create-a-bot ) для бота.
 
 ## Третий шаг. Создайте образ для Docker
 
@@ -57,17 +55,15 @@
 
 This repository is tutorial to creating Telegram Bot with using Docker.
 
-Inspired by code from [this](https://github.com/alexey-goloburdin/telegram-finance-bot) (https://github.com/alexey-goloburdin/telegram-finance-bot) repository.
+Inspired by code from [this](https://github.com/alexey-goloburdin/telegram-finance-bot) repository.
 
-## First Step. Install Docker Engine and Docker-Compose
+## First Step. Install Docker Engine
 
 [Docker Engine](https://docs.docker.com/engine/install/ubuntu/)
 
-[Docker-Compose](https://docs.docker.com/compose/install/linux/)
-
 ## Second Step. Create Bot with help @BotFather in Telegram
 
-Use Telegram [FAQ](https://core.telegram.org/bots/faq#how-do-i-create-a-bot) for Bot.
+Use [Telegram Bots FAQ](https://core.telegram.org/bots/faq#how-do-i-create-a-bot) for Bot.
 
 ## Third Step. Build image for Docker
 
@@ -105,3 +101,18 @@ Create DB in the container:
 Container stop:
 
     docker stop [container_id]
+    
+## Пример / Example
+
+    docker build --force-rm --no-cache -t tgbot_finance /home/user/tgbot/Dockerfile                     # for building image
+    docker run -d --name tgbot -v /home/user/tgbot/db:/home/db --restart unless-stopped tgbot_finance   # for create and start container
+  
+    docker exec -ti tgbot_finance bash
+    sqlite3 /home/db/finance.db
+    sqlite> Database;
+    # CTRL+C, CTRL+C, CTRL+C
+    ls ./db -a
+    exit  
+
+    docker stop tgbot           # for stopping container
+    docker start tgbot          # for running container
