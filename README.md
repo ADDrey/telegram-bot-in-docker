@@ -32,6 +32,8 @@
     # -t - настройка имени для образа в самом Docker вписываем вместо [image_name].
     # [PATH_to_Dockerfile] - путь до файла с инструкциями Dockerfile.
 
+## Четвертый шаг. Создайте и запустите контейнер в Docker
+
 Создание и Запуск контейнера:
 
     docker run -d --name tgbot -v /[full_path_to_db]/db:/home/db --restart unless-stopped [image_name]
